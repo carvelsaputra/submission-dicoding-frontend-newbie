@@ -17,18 +17,19 @@
 <main>
     <section class="input_section">
         <h2>Masukkan Buku Baru</h2>
-        <form id="inputBook">
+        <form id="inputBook" onsubmit="storeBook()">
+            <!-- <input type="hidden" id="inputBookId"> -->
             <div class="input">
                 <label for="inputBookTitle">Judul</label>
-                <input id="inputBookTitle" type="text" required>
+                <input id="inputBookTitle" type="text" >
             </div>
             <div class="input">
                 <label for="inputBookAuthor">Penulis</label>
-                <input id="inputBookAuthor" type="text" required>
+                <input id="inputBookAuthor" type="text" >
             </div>
             <div class="input">
                 <label for="inputBookYear">Tahun</label>
-                <input id="inputBookYear" type="number" required>
+                <input id="inputBookYear" type="number" >
             </div>
             <div class="input_inline">
                 <label for="inputBookIsComplete">Selesai dibaca</label>
