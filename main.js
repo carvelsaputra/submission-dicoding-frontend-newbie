@@ -14,9 +14,9 @@ function checkForStorage() {
 function storeBook() {
   dataBuku.id = new Date().getTime();
   dataBuku.judul = document.getElementById("inputBookTitle").value;
-  dataBukupenulis = document.getElementById("inputBookAuthor").value;
-  dataBukutahun = document.getElementById("inputBookYear").value;
-  dataBukustatusBaca = document.getElementById("inputBookIsComplete").value;
+  dataBuku.penulis = document.getElementById("inputBookAuthor").value;
+  dataBuku.tahun = document.getElementById("inputBookYear").value;
+  dataBuku.statusBaca = document.getElementById("inputBookIsComplete").value;
   if (checkForStorage()) {
     let list = [];
     if (localStorage.getItem(storageKey) === null) {
@@ -25,5 +25,12 @@ function storeBook() {
       list = JSON.parse(localStorage.getItem(storageKey));
     }
     localStorage.setItem(storageKey, JSON.stringify(dataBuku));
+  }
+}
+function getBookList() {
+  if (checkForStorage()) {
+    return JSON.parse(localStorage(storageKey) || []);
+  } else {
+    return [];
   }
 }
