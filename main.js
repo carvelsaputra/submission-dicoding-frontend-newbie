@@ -25,12 +25,16 @@ function storeBook() {
     list = [];
   } else {
     list = JSON.parse(localStorage.getItem(storageKey));
+    console.log(list);
   }
-  localStorage.setItem(storageKey, JSON.stringify(dataBuku));
+  list.unshift(dataBuku);
+  if (list.length > 5) {
+    list.pop();
+  }
+  localStorage.setItem(storageKey, JSON.stringify(list));
 }
 function getBookList() {
   if (!checkForStorage()) {
     return alert("Browser tidak support Web Storage !");
   }
- 
 }
