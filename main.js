@@ -17,20 +17,20 @@ function storeBook() {
   dataBuku.penulis = document.getElementById("inputBookAuthor").value;
   dataBuku.tahun = document.getElementById("inputBookYear").value;
   dataBuku.statusBaca = document.getElementById("inputBookIsComplete").value;
-  if (checkForStorage()) {
-    let list = [];
-    if (localStorage.getItem(storageKey) === null) {
-      list = [];
-    } else {
-      list = JSON.parse(localStorage.getItem(storageKey));
-    }
-    localStorage.setItem(storageKey, JSON.stringify(dataBuku));
+  if (!checkForStorage()) {
+    return alert("Browser tidak support Web Storage !");
   }
+  let list = [];
+  if (localStorage.getItem(storageKey) === null) {
+    list = [];
+  } else {
+    list = JSON.parse(localStorage.getItem(storageKey));
+  }
+  localStorage.setItem(storageKey, JSON.stringify(dataBuku));
 }
 function getBookList() {
-  if (checkForStorage()) {
-    return JSON.parse(localStorage(storageKey) || []);
-  } else {
-    return [];
+  if (!checkForStorage()) {
+    return alert("Browser tidak support Web Storage !");
   }
+ 
 }
