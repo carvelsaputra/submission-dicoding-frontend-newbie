@@ -31,12 +31,11 @@ function getBookList() {
 
 function renderBookList() {
   const books = getBookList();
-  console.log(books);
   const unCompleteBook = document.querySelector("#incompleteBookshelfList");
   const completeBook = document.querySelector("#completeBookshelfList");
 
   unCompleteBook.innerHTML = "";
-  completeBook.innerHTML =""
+  completeBook.innerHTML = "";
   // <h3>Book Title</h3>
   // <p>Penulis: John Doe</p>
   // <p>Tahun: 2002</p>
@@ -45,7 +44,6 @@ function renderBookList() {
   //     <button class="green">Selesai dibaca</button>
   //     <button class="red">Hapus buku</button>
   // </div>
-
   for (let book of books) {
     let article = document.createElement("article");
     article.innerHTML = `
@@ -53,14 +51,15 @@ function renderBookList() {
     <p> Penulis : ${book.penulis} </p>
     <p> Tahun : ${book.tahun}</p>
     `;
-console.log(article);
-    if (!book.statusBaca) return unCompleteBook.appendChild(article);
-
-    completeBook.appendChild(article);
+    if (!book.statusBaca) {
+      unCompleteBook.appendChild(article);
+    } else {
+      completeBook.appendChild(article);
+    }
   }
 }
-let onSubmit = document.getElementById("bookSubmit")
-onSubmit.addEventListener("click",function(event){
+let onSubmit = document.getElementById("bookSubmit");
+onSubmit.addEventListener("click", function (event) {
   const dataBuku = {
     id: "",
     judul: "",
@@ -76,4 +75,6 @@ onSubmit.addEventListener("click",function(event){
   dataBuku.statusBaca = document.getElementById("inputBookIsComplete").checked;
   storeBook(dataBuku);
   renderBookList();
-})
+});
+
+// window.onload = getBookList();
