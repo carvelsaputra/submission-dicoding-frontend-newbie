@@ -32,11 +32,11 @@ function getBookList() {
 function renderBookList() {
   const books = getBookList();
   console.log(books);
-  const unCompleteBook = document.getElementById("#incompleteBookshelfList");
-  const completeBook = document.getElementById("#completeBookshelfList");
+  const unCompleteBook = document.querySelector("#incompleteBookshelfList");
+  const completeBook = document.querySelector("#completeBookshelfList");
 
-  bookList.innerHTML = "";
-
+  unCompleteBook.innerHTML = "";
+  completeBook.innerHTML =""
   // <h3>Book Title</h3>
   // <p>Penulis: John Doe</p>
   // <p>Tahun: 2002</p>
@@ -49,18 +49,18 @@ function renderBookList() {
   for (let book of books) {
     let article = document.createElement("article");
     article.innerHTML = `
-    <h3> ${book.nama} </h3>
+    <h3> ${book.judul} </h3>
     <p> Penulis : ${book.penulis} </p>
     <p> Tahun : ${book.tahun}</p>
     `;
-
+console.log(article);
     if (!book.statusBaca) return unCompleteBook.appendChild(article);
 
     completeBook.appendChild(article);
   }
 }
-
-submitAction.addEventListener("submit", function (event) {
+let onSubmit = document.getElementById("bookSubmit")
+onSubmit.addEventListener("click",function(event){
   const dataBuku = {
     id: "",
     judul: "",
@@ -76,4 +76,4 @@ submitAction.addEventListener("submit", function (event) {
   dataBuku.statusBaca = document.getElementById("inputBookIsComplete").checked;
   storeBook(dataBuku);
   renderBookList();
-});
+})
