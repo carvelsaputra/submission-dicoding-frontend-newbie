@@ -36,14 +36,7 @@ function renderBookList() {
 
   unCompleteBook.innerHTML = "";
   completeBook.innerHTML = "";
-  // <h3>Book Title</h3>
-  // <p>Penulis: John Doe</p>
-  // <p>Tahun: 2002</p>
 
-  // <div class="action">
-  //     <button class="green">Selesai dibaca</button>
-  //     <button class="red">Hapus buku</button>
-  // </div>
   for (let book of books) {
     let article = document.createElement("article");
     article.innerHTML = `
@@ -77,4 +70,12 @@ onSubmit.addEventListener("click", function (event) {
   renderBookList();
 });
 
-// window.onload = getBookList();
+window.onload = renderBookList();
+// <h3>Book Title</h3>
+// <p>Penulis: John Doe</p>
+// <p>Tahun: 2002</p>
+
+// <div class="action">
+//     <button class="green">Selesai dibaca</button>
+//     <button class="red">Hapus buku</button>
+// </div>
