@@ -43,6 +43,10 @@ function renderBookList() {
     <h3> ${book.judul} </h3>
     <p> Penulis : ${book.penulis} </p>
     <p> Tahun : ${book.tahun}</p>
+    <div class="action">
+      <button class="green" id="edit">Selesai dibaca</button>
+      <button class="red" onclick="deleteBook(${book.id});">Hapus buku</button>
+    </div>
     `;
     if (!book.statusBaca) {
       unCompleteBook.appendChild(article);
@@ -51,7 +55,18 @@ function renderBookList() {
     }
   }
 }
+
+function deleteBook(id) {
+  let data = getBookList();
+  const book = data.findIndex((data) => data.id == id);
+  data.splice(book, 1);
+
+  localStorage.setItem(storageKey, JSON.stringify(data));
+  window.reload()
+}
+
 let onSubmit = document.getElementById("bookSubmit");
+
 onSubmit.addEventListener("click", function (event) {
   const dataBuku = {
     id: "",
@@ -71,11 +86,3 @@ onSubmit.addEventListener("click", function (event) {
 });
 
 window.onload = renderBookList();
-// <h3>Book Title</h3>
-// <p>Penulis: John Doe</p>
-// <p>Tahun: 2002</p>
-
-// <div class="action">
-//     <button class="green">Selesai dibaca</button>
-//     <button class="red">Hapus buku</button>
-// </div>
