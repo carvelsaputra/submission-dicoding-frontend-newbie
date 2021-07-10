@@ -57,12 +57,12 @@ function renderBookList() {
 }
 
 function deleteBook(id) {
+  console.log("clicked");
   let data = getBookList();
   const book = data.findIndex((data) => data.id == id);
   data.splice(book, 1);
-
   localStorage.setItem(storageKey, JSON.stringify(data));
-  window.reload()
+  renderBookList();
 }
 
 let onSubmit = document.getElementById("bookSubmit");
