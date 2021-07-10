@@ -57,7 +57,6 @@ function renderBookList() {
 }
 
 function deleteBook(id) {
-  console.log("clicked");
   let data = getBookList();
   const book = data.findIndex((data) => data.id == id);
   data.splice(book, 1);
