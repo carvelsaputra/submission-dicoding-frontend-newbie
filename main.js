@@ -39,23 +39,54 @@ function renderBookList() {
 
   for (let book of books) {
     let article = document.createElement("article");
-    article.innerHTML = `
-    <h3> ${book.judul} </h3>
-    <p> Penulis : ${book.penulis} </p>
-    <p> Tahun : ${book.tahun}</p>
-    <div class="action">
-      <button class="green" id="edit">Selesai dibaca</button>
-      <button class="red" onclick="deleteBook(${book.id});">Hapus buku</button>
-    </div>
-    `;
+
+    let action = document.createElement("div");
+    action.classList.add(["action"]);
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.classList.add("red","btn_action");
+    deleteBtn.addEventListener("click", function () {
+      deleteBook(book.id);
+    });
+    deleteBtn.innerText = "Hapus buku";
+
+    let editBtn = document.createElement("button");
+    editBtn.classList.add("green","btn_action");
+    editBtn.addEventListener("click", function () {
+      changeStatus(book.id);
+    });
+
+    let title = document.createElement("h3");
+    title.innerText = book.judul;
+    let writer = document.createElement("p");
+    writer.innerText = `Penulis : ${book.penulis}`;
+    let year = document.createElement("p");
+    year.innerText = `Tahun : ${book.tahun}`;
+    
+    article.append(title);
+    article.append(writer);
+    article.append(year);
+    article.appendChild(action);
+
+    action.appendChild(editBtn);
+    action.appendChild(deleteBtn);
+
     if (!book.statusBaca) {
+      editBtn.innerText = "Selesai Dibaca";
       unCompleteBook.appendChild(article);
     } else {
+      editBtn.innerText = "Belum Selesai dibaca";
       completeBook.appendChild(article);
     }
   }
 }
-
+function changeStatus(id) {
+  let data = getBookList();
+  console.log(data);
+  const book = data.findIndex((data) => data.id == id);
+  console.log(book);
+  // localStorage.setItem()
+}
 function deleteBook(id) {
   let data = getBookList();
   const book = data.findIndex((data) => data.id == id);
