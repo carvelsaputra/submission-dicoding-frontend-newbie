@@ -81,6 +81,7 @@ function renderBookList() {
   }
 }
 
+
 function changeStatus(id) {
   let books = getBookList();
   Array.from(books).forEach((book) => {
