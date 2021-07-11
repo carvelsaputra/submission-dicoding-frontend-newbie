@@ -39,19 +39,19 @@ function renderBookList() {
 
   for (let book of books) {
     let article = document.createElement("article");
-
+    article.classList.add("book_item");
     let action = document.createElement("div");
-    action.classList.add(["action"]);
+    action.classList.add("action");
 
     let deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("red","btn_action");
+    deleteBtn.classList.add("red", "btn_action");
     deleteBtn.addEventListener("click", function () {
       deleteBook(book.id);
     });
     deleteBtn.innerText = "Hapus buku";
 
     let editBtn = document.createElement("button");
-    editBtn.classList.add("green","btn_action");
+    editBtn.classList.add("green", "btn_action");
     editBtn.addEventListener("click", function () {
       changeStatus(book.id);
     });
@@ -62,7 +62,7 @@ function renderBookList() {
     writer.innerText = `Penulis : ${book.penulis}`;
     let year = document.createElement("p");
     year.innerText = `Tahun : ${book.tahun}`;
-    
+
     article.append(title);
     article.append(writer);
     article.append(year);
@@ -80,12 +80,16 @@ function renderBookList() {
     }
   }
 }
+
 function changeStatus(id) {
-  let data = getBookList();
-  console.log(data);
-  const book = data.findIndex((data) => data.id == id);
-  console.log(book);
-  // localStorage.setItem()
+  let books = getBookList();
+  Array.from(books).forEach((book) => {
+    if (book.id == id) {
+      book.statusBaca = !book.statusBaca;
+    }
+  });
+  localStorage.setItem(storageKey, JSON.stringify(books));
+  renderBookList();
 }
 function deleteBook(id) {
   let data = getBookList();
